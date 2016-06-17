@@ -1,0 +1,13 @@
+<!-- snippets/featured-collections.liquid -->
+
+<h1>Colecciones</h1>
+
+<div class="grid collection-grid">
+
+    {% for collection in collections limit:7 %}
+      {% unless collection.handle == 'frontpage' %}
+          {% include 'collection-grid-item' %}
+      {% endunless %}
+    {% endfor %}
+
+</div>

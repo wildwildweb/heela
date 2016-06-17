@@ -1,0 +1,9 @@
+{
+  "shopify": {
+    "checkout": {
+      "shop_policies": {
+        "terms_of_service": "Aviso legal"
+      }
+    }
+  }
+}

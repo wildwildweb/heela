@@ -1,0 +1,14 @@
+<!-- snippets/featured-products.liquid -->
+
+<h2>Productos destacados</h2>
+
+<div class="grid product-grid">
+
+      {% for product in collections.frontpage.products limit:3 %}
+        {% include 'product-grid-item' %}
+      {% endfor %}
+
+</div>
+<div class="view-more">
+  <a class="button" href="/collections/all">Ver más productos</a>
+</div>

@@ -1,0 +1,15 @@
+<!-- snippets/blog-latest-articles.liquid -->
+
+{% if  blogs["news"].articles_count > 0 %}
+<div id="blog-latest-articles">
+  <h1>Blog</h1>
+  <div class="grid blog-grid">
+    {% for article in blogs["news"].articles limit:2 %}
+      {% include 'blog-grid-item' %}
+    {% endfor %}
+  </div>
+</div>
+<div class="view-more">
+  <a class="button" href="/blogs/new">Ir al blog</a>
+</div>
+{% endif %}

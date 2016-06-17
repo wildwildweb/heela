@@ -1,0 +1,23 @@
+<!-- /snippets/blog-grid-item.liquid -->
+{% comment %}
+
+  This snippet is used to showcase each article during the loop,
+  'for article in blog.articles'.
+
+{% endcomment %}
+
+<div class="row row-article">
+
+  {% if article.image %}
+    <div class="blog-image">
+      <a href="{{ article.url }}">
+        <img src="{{ article.image.src | img_url: 'grande' }}" alt="">
+      </a>
+    </div>
+  {% endif %}
+
+  <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%d de %B, %Y' | replace: 'January', 'Enero' | replace: 'February', 'Febrero' | replace: 'March', 'Marzo' | replace: 'April', 'Abril' | replace: 'May', 'Mayo' | replace: 'June', 'Junio' | replace: 'July', 'Julio' | replace: 'August', 'Agosto' | replace: 'September', 'Septiembre' | replace: 'October', 'Octubre' | replace: 'November', 'Noviembre' | replace: 'December', 'Diciembre' | upcase }}</time>
+
+  <h2><a href="{{ article.url }}">{{ article.title | upcase }}</a></h2>
+
+</div>

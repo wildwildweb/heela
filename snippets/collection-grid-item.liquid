@@ -1,0 +1,86 @@
+<!-- /snippets/collection-grid-item.liquid -->
+{% comment %}
+
+  This snippet is used to showcase each collection during the loop,
+  'for product in collections[collection_handle].products' in list-collections.liquid.
+
+{% endcomment %}
+
+<div class="row row-collection">
+
+    <a class="collection-image" href="{{ collection.url }}">
+      <img src="{{ collection.image | img_url: 'large' }}" alt="{{ collection.title }}">
+    </a>
+    <a class="collection-title" href="{{ collection.url }}">{{ collection.title }}</a>
+
+</div>
+
+
+
+
+
+{% comment %}
+{% comment %}
+  Set the default grid_item_width if no variable is set
+{% endcomment %}
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'medium--one-half large--one-third' %}
+{% endunless %}
+
+{% comment %}
+  Set the default image_size if no variable is set
+{% endcomment %}
+{% unless image_size %}
+  {% assign image_size = 'grande' %}
+{% endunless %}
+
+{% assign no_collection_image = true %}
+
+<div class="grid__item {{ grid_item_width }} collection-collage__item text-center">
+
+  <a href="{{ collection.url }}" class="collection-grid__item-link collection-collage__item-wrapper">
+    {% comment %}
+      Use capture to put the collection title in a variable that is used in liquid filters
+
+    
+    {% capture collection_title %}{{ collections[collection_handle].title | escape }}{% endcapture %}
+    
+    {% if collection.image %}
+      {% assign no_collection_image = false %}
+      {% assign collection_image = collectionsimage %}
+    {% else %}
+      {% assign collection_image = collection.products.first.image %}
+    {% endif %}
+    {% endcomment %}
+
+    {% if grid_item_responsive %}
+      <style>
+        @media screen and (max-width: 480px) {
+          .grid__image--responsive {
+            background-image: url('{% if collection.image %}{{ collection.image.src | img_url: 'large' }}{% endif %}');
+          }
+        }
+        @media screen and (min-width: 481px) and (max-width: 600px) {
+          .grid__image--responsive {
+            background-image: url('{% if collection.image %}{{ collection.image.src | img_url: 'grande' }}{% endif %}');
+          }
+        }
+        @media screen and (min-width: 601px) {
+          .grid__image--responsive {
+            background-image: url('{% if collection.image %}{{ collection.image.src | img_url: '1024x1024' }}{% endif %}');
+          }
+        }
+      </style>
+      <div class="collection-grid__item-overlay grid__image grid__image--responsive"></div>
+    {% else %}
+      <div class="collection-grid__item-overlay grid__image" style="background-image: url('{% if collection.image.src %}{{ collection.image  | img_url: image_size }}{% endif %}')"></div>
+    {% endif %}
+
+
+      <span class="collection-grid__item-title">
+        {{ collection.title }}
+      </span>
+
+  </a>
+</div>
+{% endcomment %}

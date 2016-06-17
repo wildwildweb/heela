@@ -1,0 +1,30 @@
+<h1>{{ page.title }}</h1>
+
+  {{ page.content }}
+
+
+  {% form 'contact' %}
+
+    {% if form.posted_successfully? %}
+      <p class="note form-success">
+        {{ 'contact.form.post_success' | t }}
+      </p>
+    {% endif %}
+
+    {{ form.errors | default_errors }}
+
+    <label for="ContactFormName" class="label--hidden">Nombre</label>
+    <input type="text" id="ContactFormName" name="contact[{{ name_attr }}]" placeholder="Nombre" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+    <label for="ContactFormEmail" class="label--hidden">Email</label>
+    <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+
+    <label for="ContactFormPhone" class="label--hidden">Teléfono</label>
+    <input type="tel" id="ContactFormPhone" name="contact[{{ name_attr }}]" placeholder="Teléfono" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+
+    <label for="ContactFormMessage" class="label--hidden">Mensaje</label>
+    <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="Mensaje">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+    <input type="submit" class="btn right" value="Enviar">
+
+  {% endform %}
